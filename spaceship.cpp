@@ -28,9 +28,30 @@ namespace s6230 {
     }
 }
 
+namespace s6230_fixed {
+
+    // * Use =default (6230)
+    //   https://rules.sonarsource.com/cpp/RSPEC-6230
+
+    class Swallow {
+        Provenance provenance = Provenance::European;
+        int weight = 0;
+    public:
+        bool operator==( Swallow const& other ) const = default;
+    };
+
+    void test() {
+        Swallow a, b;
+        bool x = a == b;
+        // x = a < b;
+        // x = a > b;
+    }
+}
+
 namespace s6187 {
 
     // * 6187 : Operator spaceship "<=>" should be used to define comparable types
+    // https://rules.sonarsource.com/cpp/RSPEC-6187
 
     class Swallow {
         Provenance provenance = Provenance::African;
@@ -54,6 +75,7 @@ namespace s6187 {
 namespace s6186 {
 
     // * 6186 : Redundant comparison operators should not be defined
+    // https://rules.sonarsource.com/cpp/RSPEC-6186
 
     class Swallow {
         Provenance provenance = Provenance::European;
@@ -63,9 +85,6 @@ namespace s6186 {
 
         bool operator<( Swallow const& other ) const {
             return provenance < other.provenance || (provenance == other.provenance && weight < other.weight);
-        }
-        bool operator==( Swallow const& other ) const {
-            return provenance == other.provenance && weight == other.weight;
         }
     };
 
@@ -90,6 +109,8 @@ namespace cpp20 {
         bool x = a < b;
         x = a == b;
         x = a > b;
+
+        static_assert( std::is_same_v<std::strong_ordering, decltype(a<=>b)> );
     }
 }
 } // spaceship
