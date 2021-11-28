@@ -1,5 +1,5 @@
 #include <vector>
-#include <unordered_set>
+#include <unordered_map>
 #include <string>
 #include <algorithm>
 
@@ -24,11 +24,11 @@ namespace pre_cpp20 {
 
     }
 
-    void remove_bad_strings( std::unordered_set<std::string, std::string>& m ) {
+    void remove_bad_strings( std::unordered_map<std::string, std::string>& m ) {
 
         auto it = m.begin();
         while( it != m.end() ) {
-            if( *it == "bad" ) {
+            if( it->second == "bad" ) {
                 it = m.erase( it );
             } else {
                 ++it;
@@ -51,9 +51,9 @@ namespace cpp20 {
 
     }
 
-    void remove_bad_strings( std::unordered_set<std::string, std::string>& strings ) {
+    void remove_bad_strings( std::unordered_map<std::string, std::string>& strings ) {
 
-        std::erase_if(strings, []( auto s ) { return s == "bad"; } );
+        std::erase_if(strings, []( auto item ) { return item.second == "bad"; } );
 
     }
 

@@ -13,7 +13,7 @@ namespace pre_cpp20 {
 
     void use_the_force() {
 
-        auto droids = get_suspicious_droids();
+        std::vector<Droid*> droids = get_suspicious_droids();
 
         if( !looking_for_these( std::vector<Droid const*>{ droids.begin(), droids.end() } ) ) {
             std::cout << "these are not the droids you're looking for\n";

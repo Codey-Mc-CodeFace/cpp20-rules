@@ -102,6 +102,7 @@ namespace cpp20 {
         int weight = 0;
     public:
         auto operator<=>( const Swallow& ) const = default;
+        bool operator==( Swallow const& other ) const = default;
     };
 
     void test() {
